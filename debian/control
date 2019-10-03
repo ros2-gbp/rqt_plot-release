@@ -1,0 +1,12 @@
+Source: ros-eloquent-rqt-plot
+Section: misc
+Priority: extra
+Maintainer: Dirk Thomas <dthomas@osrfoundation.org>
+Build-Depends: debhelper (>= 9.0.0), ros-eloquent-ament-cmake, ros-eloquent-ros-workspace
+Homepage: http://wiki.ros.org/rqt_plot
+Standards-Version: 3.9.2
+
+Package: ros-eloquent-rqt-plot
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, python3-catkin-pkg-modules, python3-matplotlib, python3-numpy, ros-eloquent-python-qt-binding (>= 0.2.19), ros-eloquent-qt-gui-py-common (>= 0.2.25), ros-eloquent-rclpy, ros-eloquent-rqt-gui, ros-eloquent-rqt-gui-py, ros-eloquent-rqt-py-common, ros-eloquent-std-msgs, ros-eloquent-ros-workspace
+Description: rqt_plot provides a GUI plugin visualizing numeric values in a 2D plot using different plotting backends.
