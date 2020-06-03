@@ -1,3 +1,26 @@
+## rqt_plot (foxy) - 1.0.8-1
+
+The packages in the `rqt_plot` repository were released into the `foxy` distro by running `/usr/bin/bloom-release -r foxy rqt_plot` on `Wed, 03 Jun 2020 06:27:26 -0000`
+
+The `rqt_plot` package was released.
+
+Version of package(s) in repository `rqt_plot`:
+
+- upstream repository: https://github.com/ros-visualization/rqt_plot.git
+- release repository: https://github.com/ros2-gbp/rqt_plot-release.git
+- rosdistro version: `1.0.7-1`
+- old version: `1.0.7-1`
+- new version: `1.0.8-1`
+
+Versions of tools used:
+
+- bloom version: `0.9.7`
+- catkin_pkg version: `0.4.20`
+- rosdep version: `0.19.0`
+- rosdistro version: `0.8.2`
+- vcstools version: `0.1.42`
+
+
 ## rqt_plot (foxy) - 1.0.7-1
 
 The packages in the `rqt_plot` repository were released into the `foxy` distro by running `/usr/bin/bloom-release -r foxy -t foxy rqt_plot` on `Wed, 06 May 2020 18:03:44 -0000`
