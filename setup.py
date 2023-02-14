@@ -4,7 +4,7 @@ package_name = 'rqt_plot'
 
 setup(
     name=package_name,
-    version='1.2.0',
+    version='1.2.1',
     packages=[package_name, package_name + '/data_plot'],
     package_dir={'': 'src'},
     data_files=[
@@ -18,8 +18,8 @@ setup(
     install_requires=['setuptools'],
     zip_safe=True,
     author='Dorian Scholz',
-    maintainer='Dirk Thomas, Dorian Scholz, Austin Hendrix',
-    maintainer_email='dthomas@osrfoundation.org',
+    maintainer='Brandon Ong',
+    maintainer_email='brandon@openrobotics.org',
     keywords=['ROS'],
     classifiers=[
         'Intended Audience :: Developers',
