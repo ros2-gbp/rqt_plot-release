@@ -1,0 +1,12 @@
+Source: ros-iron-rqt-plot
+Section: misc
+Priority: optional
+Maintainer: Brandon Ong <brandon@openrobotics.org>
+Build-Depends: debhelper (>= 9.0.0), ros-iron-ros-workspace, python3-all, python3-setuptools, dh-python
+Homepage: http://wiki.ros.org/rqt_plot
+Standards-Version: 3.9.2
+
+Package: ros-iron-rqt-plot
+Architecture: any
+Depends: ${python3:Depends}, ${misc:Depends}, python3-catkin-pkg-modules, python3-matplotlib, python3-numpy, ros-iron-python-qt-binding (>= 0.2.19), ros-iron-qt-gui-py-common (>= 0.2.25), ros-iron-rclpy, ros-iron-rqt-gui, ros-iron-rqt-gui-py, ros-iron-rqt-py-common, ros-iron-std-msgs, ros-iron-ros-workspace
+Description: rqt_plot provides a GUI plugin visualizing numeric values in a 2D plot using different plotting backends.
