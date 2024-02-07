@@ -4,7 +4,7 @@ package_name = 'rqt_plot'
 
 setup(
     name=package_name,
-    version='1.3.1',
+    version='1.3.2',
     packages=[package_name, package_name + '/data_plot'],
     package_dir={'': 'src'},
     data_files=[
@@ -32,6 +32,7 @@ setup(
         'using different plotting backends.'
     ),
     license='BSD',
+    tests_require=['pytest'],
     entry_points={
         'console_scripts': [
             'rqt_plot = ' + package_name + '.main:main',

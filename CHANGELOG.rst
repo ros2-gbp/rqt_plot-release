@@ -2,6 +2,11 @@
 Changelog for package rqt_plot
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+1.3.2 (2024-02-07)
+------------------
+* Add in a pytest dependency for running tests. (`#92 <https://github.com/ros-visualization/rqt_plot/issues/92>`_)
+* Contributors: Chris Lalancette
+
 1.3.1 (2023-05-11)
 ------------------
 * Fix regression from #87 (`#90 <https://github.com/ros-visualization/rqt_plot/issues/90>`_)
