@@ -2,6 +2,12 @@
 Changelog for package rqt_plot
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+1.6.0 (2024-12-20)
+------------------
+* Add in the rest of the standard ament_python tests. (`#98 <https://github.com/ros-visualization/rqt_plot/issues/98>`_)
+* Remove CODEOWNERS (`#96 <https://github.com/ros-visualization/rqt_plot/issues/96>`_)
+* Contributors: Alejandro Hernández Cordero, Chris Lalancette
+
 1.5.0 (2024-04-26)
 ------------------
 
