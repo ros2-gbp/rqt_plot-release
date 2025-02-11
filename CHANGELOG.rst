@@ -2,20 +2,23 @@
 Changelog for package rqt_plot
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-1.6.1 (2025-01-11)
+1.4.1 (2025-02-11)
 ------------------
-* Add single quotes around topic in validation msg for consistency (`#99 <https://github.com/ros-visualization/rqt_plot/issues/99>`_)
+* Add single quotes around topic in validation msg for consistency (backport `#99 <https://github.com/ros-visualization/rqt_plot/issues/99>`_) (`#102 <https://github.com/ros-visualization/rqt_plot/issues/102>`_)
+  * Add single quotes around topic in validation msg for consistency (`#99 <https://github.com/ros-visualization/rqt_plot/issues/99>`_)
   This is more consistent with the other messages below.
-* Contributors: Christophe Bedard
-
-1.6.0 (2024-12-20)
-------------------
-* Add in the rest of the standard ament_python tests. (`#98 <https://github.com/ros-visualization/rqt_plot/issues/98>`_)
-* Remove CODEOWNERS (`#96 <https://github.com/ros-visualization/rqt_plot/issues/96>`_)
-* Contributors: Alejandro Hernández Cordero, Chris Lalancette
-
-1.5.0 (2024-04-26)
-------------------
+  (cherry picked from commit 2662c21b82a9758af7dd288dfeb0c6caf3b87cf4)
+  # Conflicts:
+  #	src/rqt_plot/plot_widget.py
+  * Fix merge
+  ---------
+  Co-authored-by: Christophe Bedard <bedard.christophe@gmail.com>
+  Co-authored-by: Alejandro Hernandez Cordero <ahcorde@gmail.com>
+* Remove CODEOWNERS (backport `#96 <https://github.com/ros-visualization/rqt_plot/issues/96>`_) (`#97 <https://github.com/ros-visualization/rqt_plot/issues/97>`_)
+  Remove CODEOWNERS (`#96 <https://github.com/ros-visualization/rqt_plot/issues/96>`_)
+  (cherry picked from commit 842cd61ba59a5240b730791de567ad489d2e2900)
+  Co-authored-by: Alejandro Hernández Cordero <ahcorde@gmail.com>
+* Contributors: mergify[bot]
 
 1.4.0 (2024-03-28)
 ------------------
