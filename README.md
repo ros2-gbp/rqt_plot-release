@@ -1,3 +1,26 @@
+## rqt_plot (rolling) - 1.6.2-1
+
+The packages in the `rqt_plot` repository were released into the `rolling` distro by running `/usr/bin/bloom-release --rosdistro rolling --track rolling rqt_plot` on `Thu, 13 Feb 2025 10:06:42 -0000`
+
+The `rqt_plot` package was released.
+
+Version of package(s) in repository `rqt_plot`:
+
+- upstream repository: https://github.com/ros-visualization/rqt_plot.git
+- release repository: https://github.com/ros2-gbp/rqt_plot-release.git
+- rosdistro version: `1.6.1-1`
+- old version: `1.6.1-1`
+- new version: `1.6.2-1`
+
+Versions of tools used:
+
+- bloom version: `0.12.0`
+- catkin_pkg version: `1.0.0`
+- rosdep version: `0.25.1`
+- rosdistro version: `1.0.1`
+- vcstools version: `0.1.42`
+
+
 ## rqt_plot (humble) - 1.1.3-1
 
 The packages in the `rqt_plot` repository were released into the `humble` distro by running `/usr/bin/bloom-release --rosdistro humble --track humble rqt_plot` on `Tue, 11 Feb 2025 13:04:03 -0000`
