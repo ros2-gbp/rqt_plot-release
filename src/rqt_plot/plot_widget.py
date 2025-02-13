@@ -123,7 +123,7 @@ def get_plot_fields(node, topic_name):
 
         if is_array_or_sequence:
             if not has_index:
-                return [], base_error_msg + f'{name} is a nested type but no index provided'
+                return [], base_err_msg + f"'{name}' is a nested type but no index provided"
 
             if current_type.has_maximum_size():
                 # has_maximum_size() doesn't necessarily mean that the object has a 'maximum_size' field. The meaning
@@ -131,11 +131,11 @@ def get_plot_fields(node, topic_name):
                 size = current_type.maximum_size if hasattr(current_type, 'maximum_size') else current_type.size
                 if index >= size:
                     return [], (
-                        base_error_msg +
+                        base_err_msg +
                         f"index '{index}' out of bounds, maximum size is {size}")
             current_type = current_type.value_type
         elif has_index:
-            return [], base_error_msg + "{name} is not an array or sequence"
+            return [], base_err_msg + f"'{name}' is not an array or sequence"
 
         if not isinstance(current_type, NamespacedType):
             break
@@ -163,10 +163,13 @@ def get_plot_fields(node, topic_name):
             current_message_class.get_fields_and_field_types().keys(), current_message_class.SLOT_TYPES
         ):
             if isinstance(n_current_type, BasicType):
-                plottable_fields.append(n_field[1:])
+                plottable_fields.append(n_field)
         if plottable_fields:
+            # We try to plot the sub-fields of a field if '/topic/field' or '/topic/field/', so
+            # make sure to remove trailing slashes
+            topic_name_rstrip = topic_name.rstrip('/')
             return (
-                [f'{topic_name}/{field}' for field in plottable_fields],
+                [f'{topic_name_rstrip}/{field}' for field in plottable_fields],
                 f"{len(plottable_fields)} plottable fields in '{topic_name}'"
             )
     if not isinstance(current_type, BasicType):
