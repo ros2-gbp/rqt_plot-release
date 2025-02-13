@@ -1,40 +1,42 @@
-#!/usr/bin/env python
-
 # Copyright (c) 2011, Ye Cheng, Dorian Scholz
-# All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
-# modification, are permitted provided that the following conditions
-# are met:
+# modification, are permitted provided that the following conditions are met:
 #
-#   * Redistributions of source code must retain the above copyright
-#     notice, this list of conditions and the following disclaimer.
-#   * Redistributions in binary form must reproduce the above
-#     copyright notice, this list of conditions and the following
-#     disclaimer in the documentation and/or other materials provided
-#     with the distribution.
-#   * Neither the name of the TU Darmstadt nor the names of its
-#     contributors may be used to endorse or promote products derived
-#     from this software without specific prior written permission.
+#    * Redistributions of source code must retain the above copyright
+#      notice, this list of conditions and the following disclaimer.
 #
-# THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
-# "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
-# LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS
-# FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE
-# COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
-# INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,
-# BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
-# LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
-# CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
-# LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN
-# ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+#    * Redistributions in binary form must reproduce the above copyright
+#      notice, this list of conditions and the following disclaimer in the
+#      documentation and/or other materials provided with the distribution.
+#
+#    * Neither the name of the TU Darmstadt nor the names of its
+#      contributors may be used to endorse or promote products derived from
+#      this software without specific prior written permission.
+#
+# THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+# AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+# IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+# ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
+# LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+# CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+# SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+# INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+# CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+# ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
+
+import operator
+
+import matplotlib
+from matplotlib.backends.backend_qt5agg import NavigationToolbar2QT as NavigationToolbar
+from matplotlib.figure import Figure
 
 from python_qt_binding import QT_BINDING, QT_BINDING_VERSION
 
 try:
     from pkg_resources import parse_version
-except:
+except ImportError:
     import re
 
     def parse_version(s):
@@ -45,56 +47,29 @@ if QT_BINDING == 'pyside':
     if parse_version(qt_binding_version) <= parse_version('1.1.2'):
         raise ImportError('A PySide version newer than 1.1.0 is required.')
 
-from python_qt_binding.QtCore import Slot, Qt, qVersion, qWarning, Signal
+from python_qt_binding.QtCore import Qt, Signal
 from python_qt_binding.QtGui import QColor
-from python_qt_binding.QtWidgets import QWidget, QVBoxLayout, QSizePolicy
+from python_qt_binding.QtWidgets import QSizePolicy, QVBoxLayout, QWidget
 
-import operator
-import matplotlib
-if qVersion().startswith('5.'):
-    if QT_BINDING == 'pyside':
-        if parse_version(matplotlib.__version__) < parse_version('2.1.0'):
-            raise ImportError('A newer matplotlib is required (at least 2.1.0 for PySide 2)')
-    if parse_version(matplotlib.__version__) < parse_version('1.4.0'):
-        raise ImportError('A newer matplotlib is required (at least 1.4.0 for Qt 5)')
-    try:
-        matplotlib.use('Qt5Agg')
-        from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
-    except ImportError:
-        # work around bug in dateutil
-        import sys
-        import thread
-        sys.modules['_thread'] = thread
-        from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
-    from matplotlib.backends.backend_qt5agg import NavigationToolbar2QT as NavigationToolbar
-elif qVersion().startswith('4.'):
-    if parse_version(matplotlib.__version__) < parse_version('1.1.0'):
-        raise ImportError('A newer matplotlib is required (at least 1.1.0 for Qt 4)')
-    try:
-        matplotlib.use('Qt4Agg')
-        from matplotlib.backends.backend_qt4agg import FigureCanvasQTAgg as FigureCanvas
-    except ImportError:
-        # work around bug in dateutil
-        import sys
-        import thread
-        sys.modules['_thread'] = thread
-        from matplotlib.backends.backend_qt4agg import FigureCanvasQTAgg as FigureCanvas
-    try:
-        from matplotlib.backends.backend_qt4agg import NavigationToolbar2QTAgg as NavigationToolbar
-    except ImportError:
-        from matplotlib.backends.backend_qt4agg import NavigationToolbar2QT as NavigationToolbar
-else:
-    raise NotImplementedError('Unsupport Qt version: %s' % qVersion())
-
-from matplotlib.figure import Figure
-
-import numpy
+if QT_BINDING == 'pyside':
+    if parse_version(matplotlib.__version__) < parse_version('2.1.0'):
+        raise ImportError('A newer matplotlib is required (at least 2.1.0 for PySide 2)')
+if parse_version(matplotlib.__version__) < parse_version('1.4.0'):
+    raise ImportError('A newer matplotlib is required (at least 1.4.0 for Qt 5)')
+try:
+    matplotlib.use('Qt5Agg')
+    from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
+except ImportError:
+    # work around bug in dateutil
+    import sys
+    import thread
+    sys.modules['_thread'] = thread
+    from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 
 
 class MatDataPlot(QWidget):
 
     class Canvas(FigureCanvas):
-
         """Ultimately, this is a QWidget (as well as a FigureCanvasAgg, etc.)."""
 
         def __init__(self, parent=None):
@@ -111,12 +86,13 @@ class MatDataPlot(QWidget):
 
         def safe_tight_layout(self):
             """
-            Deal with "ValueError: bottom cannot be >= top" bug in older matplotlib versions
-            (before v2.2.3)
+            Deal with "ValueError: bottom cannot be >= top" bug in matplotlib versions < v2.2.3.
 
-            References:
+            References
+            ----------
                 - https://github.com/matplotlib/matplotlib/pull/10915
                 - https://github.com/ros-visualization/rqt_plot/issues/35
+
             """
             try:
                 if self.figure.get_figheight() == 0 or self.figure.get_figwidth() == 0:

@@ -1,40 +1,31 @@
-#!/usr/bin/env python
-#
-# Software License Agreement (BSD License)
-#
 # Copyright (c) 2009, Willow Garage, Inc.
-# All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
-# modification, are permitted provided that the following conditions
-# are met:
+# modification, are permitted provided that the following conditions are met:
 #
-#  * Redistributions of source code must retain the above copyright
-#    notice, this list of conditions and the following disclaimer.
-#  * Redistributions in binary form must reproduce the above
-#    copyright notice, this list of conditions and the following
-#    disclaimer in the documentation and/or other materials provided
-#    with the distribution.
-#  * Neither the name of Willow Garage, Inc. nor the names of its
-#    contributors may be used to endorse or promote products derived
-#    from this software without specific prior written permission.
+#    * Redistributions of source code must retain the above copyright
+#      notice, this list of conditions and the following disclaimer.
 #
-# THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
-# "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
-# LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS
-# FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE
-# COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
-# INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,
-# BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
-# LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
-# CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
-# LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN
-# ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+#    * Redistributions in binary form must reproduce the above copyright
+#      notice, this list of conditions and the following disclaimer in the
+#      documentation and/or other materials provided with the distribution.
+#
+#    * Neither the name of the Willow Garage nor the names of its
+#      contributors may be used to endorse or promote products derived from
+#      this software without specific prior written permission.
+#
+# THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+# AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+# IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+# ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
+# LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+# CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+# SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+# INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+# CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+# ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
-#
 
-import string
-import sys
 import threading
 import time
 
@@ -43,7 +34,6 @@ from rclpy.qos import QoSProfile
 from rclpy.qos import QoSReliabilityPolicy
 from rosidl_runtime_py.utilities import get_message
 from std_msgs.msg import Bool
-from python_qt_binding.QtCore import qWarning
 
 
 class RosPlotException(Exception):
@@ -52,8 +42,7 @@ class RosPlotException(Exception):
 
 def _get_topic_type(node, topic):
     """
-    subroutine for getting the topic type
-    (nearly identical to rostopic._get_topic_type, except it returns rest of name instead of fn)
+    Get the topic type.
 
     :returns: topic type, real topic name, and rest of name referenced
       if the topic points to a field within a topic, e.g. /rosout/msg, ``str, str, str``
@@ -72,10 +61,10 @@ def _get_topic_type(node, topic):
 
 def get_topic_type(node, topic):
     """
-    Get the topic type (nearly identical to rostopic.get_topic_type, except it doesn't return a fn)
+    Get the topic type.
 
     :returns: topic type, real topic name, and rest of name referenced
-      if the \a topic points to a field within a topic, e.g. /rosout/msg, ``str, str, str``
+      if the topic points to a field within a topic, e.g. /rosout/msg, ``str, str, str``
     """
     topic_type, real_topic, rest = _get_topic_type(node, topic)
     if topic_type:
@@ -84,11 +73,8 @@ def get_topic_type(node, topic):
         return None, None, None
 
 
-class ROSData(object):
-
-    """
-    Subscriber to ROS topic that buffers incoming data
-    """
+class ROSData:
+    """Subscriber to ROS topic that buffers incoming data."""
 
     def __init__(self, node, topic, start_time):
         self.name = topic
@@ -105,13 +91,14 @@ class ROSData(object):
             self.field_evals = generate_field_evals(fields)
             data_class = get_message(topic_type)
             self.sub = node.create_subscription(
-                data_class, real_topic, self._ros_cb, qos_profile=self.choose_qos(node, real_topic))
+                data_class, real_topic, self._ros_cb,
+                qos_profile=self.choose_qos(node, real_topic))
         else:
-            self.error = RosPlotException("Can not resolve topic type of %s" % topic)
+            self.error = RosPlotException('Can not resolve topic type of %s' % topic)
 
     def choose_qos(self, node, topic_name):
 
-        qos_profile=QoSProfile(depth=10)
+        qos_profile = QoSProfile(depth=10)
         reliability_reliable_endpoints_count = 0
         durability_transient_local_endpoints_count = 0
         pubs_info = node.get_publishers_info_by_topic(topic_name)
@@ -158,7 +145,8 @@ class ROSData(object):
 
     def _ros_cb(self, msg):
         """
-        ROS subscriber callback
+        ROS subscriber callback.
+
         :param msg: ROS message data
         """
         try:
@@ -173,13 +161,13 @@ class ROSData(object):
                     self.buff_x.append(time.time() - self.start_time)
                 # self.axes[index].plot(datax, buff_y)
             except AttributeError as e:
-                self.error = RosPlotException("Invalid topic spec [%s]: %s" % (self.name, str(e)))
+                self.error = RosPlotException('Invalid topic spec [%s]: %s' % (self.name, str(e)))
         finally:
             self.lock.release()
 
-    def next(self):
+    def next_data(self):
         """
-        Get the next data in the series
+        Get the next data in the series.
 
         :returns: [xdata], [ydata]
         """
@@ -208,13 +196,15 @@ class ROSData(object):
             return float(val)
         except IndexError:
             self.error = RosPlotException(
-                "[%s] index error for: %s" % (self.name, str(val).replace('\n', ', ')))
+                '[%s] index error for: %s' % (self.name, str(val).replace('\n', ', ')))
         except TypeError:
-            self.error = RosPlotException("[%s] value was not numeric: %s" % (self.name, val))
+            self.error = RosPlotException('[%s] value was not numeric: %s' % (self.name, val))
 
 
 def _array_eval(field_name, slot_num):
     """
+    Return a function to evaluate an array.
+
     :param field_name: name of field to index into, ``str``
     :param slot_num: index of slot to return, ``str``
     :returns: fn(msg_field)->msg_field[slot_num]
@@ -226,6 +216,8 @@ def _array_eval(field_name, slot_num):
 
 def _field_eval(field_name):
     """
+    Return a function to evaluate a field.
+
     :param field_name: name of field to return, ``str``
     :returns: fn(msg_field)->msg_field.field_name
     """
@@ -247,4 +239,4 @@ def generate_field_evals(fields):
                 evals.append(_field_eval(f))
         return evals
     except Exception as e:
-        raise RosPlotException("cannot parse field reference [%s]: %s" % (fields, str(e)))
+        raise RosPlotException('cannot parse field reference [%s]: %s' % (fields, str(e)))
