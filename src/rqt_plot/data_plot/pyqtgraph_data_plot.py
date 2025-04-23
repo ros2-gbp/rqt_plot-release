@@ -1,62 +1,56 @@
-#!/usr/bin/env python
-
 # Copyright (c) 2011, Dorian Scholz
-# All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
-# modification, are permitted provided that the following conditions
-# are met:
+# modification, are permitted provided that the following conditions are met:
 #
-#   * Redistributions of source code must retain the above copyright
-#     notice, this list of conditions and the following disclaimer.
-#   * Redistributions in binary form must reproduce the above
-#     copyright notice, this list of conditions and the following
-#     disclaimer in the documentation and/or other materials provided
-#     with the distribution.
-#   * Neither the name of the TU Darmstadt nor the names of its
-#     contributors may be used to endorse or promote products derived
-#     from this software without specific prior written permission.
+#    * Redistributions of source code must retain the above copyright
+#      notice, this list of conditions and the following disclaimer.
 #
-# THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
-# "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
-# LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS
-# FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE
-# COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
-# INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,
-# BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
-# LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
-# CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
-# LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN
-# ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+#    * Redistributions in binary form must reproduce the above copyright
+#      notice, this list of conditions and the following disclaimer in the
+#      documentation and/or other materials provided with the distribution.
+#
+#    * Neither the name of the TU Darmstadt nor the names of its
+#      contributors may be used to endorse or promote products derived from
+#      this software without specific prior written permission.
+#
+# THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+# AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+# IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+# ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
+# LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+# CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+# SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+# INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+# CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+# ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
 
-from python_qt_binding.QtCore import Slot, Qt, qVersion, qWarning, Signal
+from pyqtgraph import mkBrush, mkPen, PlotWidget
+
+from python_qt_binding.QtCore import Qt, Signal
 from python_qt_binding.QtGui import QColor
 from python_qt_binding.QtWidgets import QVBoxLayout, QWidget
 
-if qVersion().startswith('5.'):
-    try:
-        from pkg_resources import parse_version
-    except:
-        import re
+try:
+    from pkg_resources import parse_version
+except ImportError:
+    import re
 
-        def parse_version(s):
-            return [int(x) for x in re.sub(r'(\.0+)*$', '', s).split('.')]
+    def parse_version(s):
+        return [int(x) for x in re.sub(r'(\.0+)*$', '', s).split('.')]
 
-    try:
-        from pyqtgraph import __version__ as pyqtgraph_version
-    except RuntimeError:
-        # pyqtgraph < 1.0 using Qt4 failing on 16.04 because kinetic uses Qt5.
-        # This raises RuntimeError('the PyQt4.QtCore and PyQt5.QtCore modules both
-        # wrap the QObject class')
-        import pkg_resources
-        pyqtgraph_version = pkg_resources.get_distribution("pyqtgraph").version
+try:
+    from pyqtgraph import __version__ as pyqtgraph_version
+except RuntimeError:
+    # pyqtgraph < 1.0 using Qt4 failing on 16.04 because kinetic uses Qt5.
+    # This raises RuntimeError('the PyQt4.QtCore and PyQt5.QtCore modules both
+    # wrap the QObject class')
+    import pkg_resources
+    pyqtgraph_version = pkg_resources.get_distribution('pyqtgraph').version
 
-    if parse_version(pyqtgraph_version) < parse_version('0.10.0'):
-        raise ImportError('A newer PyQtGraph version is required (at least 0.10 for Qt 5)')
-
-from pyqtgraph import PlotWidget, mkPen, mkBrush
-import numpy
+if parse_version(pyqtgraph_version) < parse_version('0.10.0'):
+    raise ImportError('A newer PyQtGraph version is required (at least 0.10 for Qt 5)')
 
 
 class PyQtGraphDataPlot(QWidget):
@@ -79,13 +73,14 @@ class PyQtGraphDataPlot(QWidget):
 
     def add_curve(self, curve_id, curve_name, curve_color=QColor(Qt.blue), markers_on=False):
         pen = mkPen(curve_color, width=1)
-        symbol = "o"
+        symbol = 'o'
         symbolPen = mkPen(QColor(Qt.black))
         symbolBrush = mkBrush(curve_color)
         # this adds the item to the plot and legend
         if markers_on:
-            plot = self._plot_widget.plot(name=curve_name, pen=pen, symbol=symbol,
-                                          symbolPen=symbolPen, symbolBrush=symbolBrush, symbolSize=4)
+            plot = self._plot_widget.plot(
+                name=curve_name, pen=pen, symbol=symbol,
+                symbolPen=symbolPen, symbolBrush=symbolBrush, symbolSize=4)
         else:
             plot = self._plot_widget.plot(name=curve_name, pen=pen)
         self._curves[curve_id] = plot

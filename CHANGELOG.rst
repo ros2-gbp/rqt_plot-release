@@ -2,17 +2,59 @@
 Changelog for package rqt_plot
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-1.1.4 (2025-03-25)
+1.6.2 (2025-01-13)
 ------------------
-* Fix f-string and add single quote around field name (backport `#100 <https://github.com/ros-visualization/rqt_plot/issues/100>`_) (`#105 <https://github.com/ros-visualization/rqt_plot/issues/105>`_)
-* Contributors: mergify[bot]
+* Add unit tests for topic name validation & field expansion (`#108 <https://github.com/ros-visualization/rqt_plot/issues/108>`_)
+* Fix double slash when plotting all sub-fields with trailing slash (`#107 <https://github.com/ros-visualization/rqt_plot/issues/107>`_)
+* Fix listing of nested basic type fields (`#101 <https://github.com/ros-visualization/rqt_plot/issues/101>`_)
+* Fix f-string and add single quote around field name (`#100 <https://github.com/ros-visualization/rqt_plot/issues/100>`_)
+* Contributors: Christophe Bedard
 
-1.1.3 (2025-02-11)
+1.6.1 (2025-01-11)
 ------------------
-* Add single quotes around topic in validation msg for consistency (backport `#99 <https://github.com/ros-visualization/rqt_plot/issues/99>`_) (`#103 <https://github.com/ros-visualization/rqt_plot/issues/103>`_)
-* Contributors: mergify[bot]
+* Add single quotes around topic in validation msg for consistency (`#99 <https://github.com/ros-visualization/rqt_plot/issues/99>`_)
+  This is more consistent with the other messages below.
+* Contributors: Christophe Bedard
 
-1.1.2 (2022-05-10)
+1.6.0 (2024-12-20)
+------------------
+* Add in the rest of the standard ament_python tests. (`#98 <https://github.com/ros-visualization/rqt_plot/issues/98>`_)
+* Remove CODEOWNERS (`#96 <https://github.com/ros-visualization/rqt_plot/issues/96>`_)
+* Contributors: Alejandro Hernández Cordero, Chris Lalancette
+
+1.5.0 (2024-04-26)
+------------------
+
+1.4.0 (2024-03-28)
+------------------
+* Add in copyright tests to rqt_bag. (`#95 <https://github.com/ros-visualization/rqt_plot/issues/95>`_)
+* Add a test dependency on pytest. (`#94 <https://github.com/ros-visualization/rqt_plot/issues/94>`_)
+* Contributors: Chris Lalancette
+
+1.3.2 (2024-02-07)
+------------------
+* Add in a pytest dependency for running tests. (`#92 <https://github.com/ros-visualization/rqt_plot/issues/92>`_)
+* Contributors: Chris Lalancette
+
+1.3.1 (2023-05-11)
+------------------
+* Fix regression from #87 (`#90 <https://github.com/ros-visualization/rqt_plot/issues/90>`_)
+* Contributors: Yadunund
+
+1.3.0 (2023-04-28)
+------------------
+
+1.2.2 (2023-04-11)
+------------------
+* Changes the use of __slots_\_ for the field and field type getter (`#87 <https://github.com/ros-visualization/rqt_plot/issues/87>`_)
+* Contributors: Eloy Briceno
+
+1.2.1 (2023-02-14)
+------------------
+* [rolling] Update maintainers - 2022-11-07 (`#83 <https://github.com/ros-visualization/rqt_plot/issues/83>`_)
+* Contributors: Audrow Nash, Jacob Perron
+
+1.2.0 (2022-05-10)
 ------------------
 * Fix fixed-size Array visualization (`#81 <https://github.com/ros-visualization/rqt_plot/issues/81>`_)
 * Contributors: Michael Jeronimo
