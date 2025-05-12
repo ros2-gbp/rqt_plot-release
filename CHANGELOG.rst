@@ -2,13 +2,10 @@
 Changelog for package rqt_plot
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-1.7.1 (2025-05-12)
+1.6.3 (2025-05-12)
 ------------------
-* Fix for displaying constant curves (`#114 <https://github.com/ros-visualization/rqt_plot/issues/114>`_)
-* Contributors: Martin Pecka
-
-1.7.0 (2025-04-28)
-------------------
+* Fix for displaying constant curves (backport `#114 <https://github.com/ros-visualization/rqt_plot/issues/114>`_) (`#115 <https://github.com/ros-visualization/rqt_plot/issues/115>`_)
+* Contributors: mergify[bot]
 
 1.6.2 (2025-01-13)
 ------------------
