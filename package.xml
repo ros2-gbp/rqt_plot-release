@@ -1,6 +1,6 @@
 <package format="2">
   <name>rqt_plot</name>
-  <version>1.6.3</version>
+  <version>1.4.3</version>
   <description>rqt_plot provides a GUI plugin visualizing numeric values in a 2D plot using different plotting backends.</description>
 
   <maintainer email="brandon@openrobotics.org">Brandon Ong</maintainer>
@@ -17,13 +17,12 @@
   <author email="mabel@openrobotics.org">Mabel Zhang</author>
   <author email="logans@cottsay.net">Scott K Logan</author>
 
-  <exec_depend>ament_index_python</exec_depend>
   <exec_depend version_gte="0.2.19">python_qt_binding</exec_depend>
   <exec_depend>python3-matplotlib</exec_depend>
   <exec_depend>python3-numpy</exec_depend>
+  <exec_depend>python3-catkin-pkg-modules</exec_depend>
   <exec_depend version_gte="0.2.25">qt_gui_py_common</exec_depend>
   <exec_depend>rclpy</exec_depend>
-  <exec_depend>rosidl_parser</exec_depend>
   <exec_depend>rosidl_runtime_py</exec_depend>
   <exec_depend>rqt_gui</exec_depend>
   <exec_depend>rqt_gui_py</exec_depend>
@@ -31,9 +30,6 @@
   <exec_depend>std_msgs</exec_depend>
 
   <test_depend>ament_copyright</test_depend>
-  <test_depend>ament_flake8</test_depend>
-  <test_depend>ament_pep257</test_depend>
-  <test_depend>ament_xmllint</test_depend>
   <test_depend>python3-pytest</test_depend>
 
   <export>

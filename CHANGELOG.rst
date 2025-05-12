@@ -2,33 +2,36 @@
 Changelog for package rqt_plot
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-1.6.3 (2025-05-12)
+1.4.3 (2025-05-12)
 ------------------
-* Fix for displaying constant curves (backport `#114 <https://github.com/ros-visualization/rqt_plot/issues/114>`_) (`#115 <https://github.com/ros-visualization/rqt_plot/issues/115>`_)
+* Fix for displaying constant curves (backport `#114 <https://github.com/ros-visualization/rqt_plot/issues/114>`_) (`#116 <https://github.com/ros-visualization/rqt_plot/issues/116>`_)
 * Contributors: mergify[bot]
 
-1.6.2 (2025-01-13)
+1.4.2 (2025-02-13)
 ------------------
-* Add unit tests for topic name validation & field expansion (`#108 <https://github.com/ros-visualization/rqt_plot/issues/108>`_)
-* Fix double slash when plotting all sub-fields with trailing slash (`#107 <https://github.com/ros-visualization/rqt_plot/issues/107>`_)
-* Fix listing of nested basic type fields (`#101 <https://github.com/ros-visualization/rqt_plot/issues/101>`_)
-* Fix f-string and add single quote around field name (`#100 <https://github.com/ros-visualization/rqt_plot/issues/100>`_)
-* Contributors: Christophe Bedard
+* Add unit tests for topic name validation & field expansion (backport `#108 <https://github.com/ros-visualization/rqt_plot/issues/108>`_) (`#110 <https://github.com/ros-visualization/rqt_plot/issues/110>`_)
+* Fix double slash when plotting all sub-fields with trailing slash (backport `#107 <https://github.com/ros-visualization/rqt_plot/issues/107>`_) (`#109 <https://github.com/ros-visualization/rqt_plot/issues/109>`_)
+* Fix f-string and add single quote around field name (backport `#100 <https://github.com/ros-visualization/rqt_plot/issues/100>`_) (`#104 <https://github.com/ros-visualization/rqt_plot/issues/104>`_)
+* Fix listing of nested basic type fields (backport `#101 <https://github.com/ros-visualization/rqt_plot/issues/101>`_) (`#106 <https://github.com/ros-visualization/rqt_plot/issues/106>`_)
+* Contributors: mergify[bot]
 
-1.6.1 (2025-01-11)
+1.4.1 (2025-02-11)
 ------------------
-* Add single quotes around topic in validation msg for consistency (`#99 <https://github.com/ros-visualization/rqt_plot/issues/99>`_)
+* Add single quotes around topic in validation msg for consistency (backport `#99 <https://github.com/ros-visualization/rqt_plot/issues/99>`_) (`#102 <https://github.com/ros-visualization/rqt_plot/issues/102>`_)
+  * Add single quotes around topic in validation msg for consistency (`#99 <https://github.com/ros-visualization/rqt_plot/issues/99>`_)
   This is more consistent with the other messages below.
-* Contributors: Christophe Bedard
-
-1.6.0 (2024-12-20)
-------------------
-* Add in the rest of the standard ament_python tests. (`#98 <https://github.com/ros-visualization/rqt_plot/issues/98>`_)
-* Remove CODEOWNERS (`#96 <https://github.com/ros-visualization/rqt_plot/issues/96>`_)
-* Contributors: Alejandro Hernández Cordero, Chris Lalancette
-
-1.5.0 (2024-04-26)
-------------------
+  (cherry picked from commit 2662c21b82a9758af7dd288dfeb0c6caf3b87cf4)
+  # Conflicts:
+  #	src/rqt_plot/plot_widget.py
+  * Fix merge
+  ---------
+  Co-authored-by: Christophe Bedard <bedard.christophe@gmail.com>
+  Co-authored-by: Alejandro Hernandez Cordero <ahcorde@gmail.com>
+* Remove CODEOWNERS (backport `#96 <https://github.com/ros-visualization/rqt_plot/issues/96>`_) (`#97 <https://github.com/ros-visualization/rqt_plot/issues/97>`_)
+  Remove CODEOWNERS (`#96 <https://github.com/ros-visualization/rqt_plot/issues/96>`_)
+  (cherry picked from commit 842cd61ba59a5240b730791de567ad489d2e2900)
+  Co-authored-by: Alejandro Hernández Cordero <ahcorde@gmail.com>
+* Contributors: mergify[bot]
 
 1.4.0 (2024-03-28)
 ------------------
