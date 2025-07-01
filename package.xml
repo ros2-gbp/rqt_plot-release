@@ -1,6 +1,6 @@
 <package format="2">
   <name>rqt_plot</name>
-  <version>1.7.1</version>
+  <version>1.7.2</version>
   <description>rqt_plot provides a GUI plugin visualizing numeric values in a 2D plot using different plotting backends.</description>
 
   <maintainer email="brandon@openrobotics.org">Brandon Ong</maintainer>
@@ -35,6 +35,7 @@
   <test_depend>ament_pep257</test_depend>
   <test_depend>ament_xmllint</test_depend>
   <test_depend>python3-pytest</test_depend>
+  <test_depend>test_msgs</test_depend>
 
   <export>
     <architecture_independent/>
