@@ -2,6 +2,11 @@
 Changelog for package rqt_plot
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+1.7.2 (2025-07-01)
+------------------
+* Added missing test dependency (`#118 <https://github.com/ros-visualization/rqt_plot/issues/118>`_)
+* Contributors: Alejandro Hernández Cordero
+
 1.7.1 (2025-05-12)
 ------------------
 * Fix for displaying constant curves (`#114 <https://github.com/ros-visualization/rqt_plot/issues/114>`_)
