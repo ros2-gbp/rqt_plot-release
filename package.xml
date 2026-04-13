@@ -1,6 +1,6 @@
 <package format="2">
   <name>rqt_plot</name>
-  <version>1.7.2</version>
+  <version>1.7.4</version>
   <description>rqt_plot provides a GUI plugin visualizing numeric values in a 2D plot using different plotting backends.</description>
 
   <maintainer email="brandon@openrobotics.org">Brandon Ong</maintainer>
@@ -16,6 +16,9 @@
   <author>Dorian Scholz</author>
   <author email="mabel@openrobotics.org">Mabel Zhang</author>
   <author email="logans@cottsay.net">Scott K Logan</author>
+
+  <build_depend>qt6-base-dev</build_depend>
+  <build_depend>libqt6widgets6t64</build_depend>
 
   <exec_depend>ament_index_python</exec_depend>
   <exec_depend version_gte="0.2.19">python_qt_binding</exec_depend>
