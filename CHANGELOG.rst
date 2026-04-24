@@ -2,16 +2,33 @@
 Changelog for package rqt_plot
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-1.6.4 (2026-04-13)
+1.7.5 (2026-04-24)
 ------------------
-* fix setuptools deprecations (backport `#123 <https://github.com/ros-visualization/rqt_plot/issues/123>`_) (`#124 <https://github.com/ros-visualization/rqt_plot/issues/124>`_)
-* Added missing test dependency (backport `#118 <https://github.com/ros-visualization/rqt_plot/issues/118>`_) (`#119 <https://github.com/ros-visualization/rqt_plot/issues/119>`_)
-* Contributors: mergify[bot]
+* Use qt-base-dev / libqtwidgets (`#128 <https://github.com/ros-visualization/rqt_plot/issues/128>`_)
+* Contributors: Shane Loretz
 
-1.6.3 (2025-05-12)
+1.7.4 (2026-04-13)
 ------------------
-* Fix for displaying constant curves (backport `#114 <https://github.com/ros-visualization/rqt_plot/issues/114>`_) (`#115 <https://github.com/ros-visualization/rqt_plot/issues/115>`_)
-* Contributors: mergify[bot]
+* Support Qt6 (`#127 <https://github.com/ros-visualization/rqt_plot/issues/127>`_)
+* Contributors: Alejandro Hernández Cordero
+
+1.7.3 (2025-07-30)
+------------------
+* fix setuptools deprecations (`#123 <https://github.com/ros-visualization/rqt_plot/issues/123>`_)
+* Contributors: mosfet80
+
+1.7.2 (2025-07-01)
+------------------
+* Added missing test dependency (`#118 <https://github.com/ros-visualization/rqt_plot/issues/118>`_)
+* Contributors: Alejandro Hernández Cordero
+
+1.7.1 (2025-05-12)
+------------------
+* Fix for displaying constant curves (`#114 <https://github.com/ros-visualization/rqt_plot/issues/114>`_)
+* Contributors: Martin Pecka
+
+1.7.0 (2025-04-28)
+------------------
 
 1.6.2 (2025-01-13)
 ------------------
